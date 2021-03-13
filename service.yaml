@@ -4,7 +4,7 @@ metadata:
   name: svc-2
 spec:
   selector:
-    run: app
+    type: app
   ports:
   - port: 80
     protocol: TCP
