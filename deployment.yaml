@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
       - name: container
-        image: tmkube/app:v1
+        image: nginx
