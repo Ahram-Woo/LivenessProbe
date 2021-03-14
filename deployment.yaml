@@ -1,31 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-rolling
-  label:
-    app: test
+  name: rolling-update-deploy
 spec:
-    replica: 4
-    strategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 3 
-        maxSerge: 4
-   selector:
-     matchLabels:
-      app: test
-   template:
-     metadata:
-       labels:
-         app: test
+  selector:
+    matchLabels:
+      app: webserver1
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: webserver1
     spec:
       containers:
-      - name: test
-        image: echo       
+      - name: webserver1
+        image: vilasmankala/my-repo-test:webserver2
         ports:
-        - containerPort: 80
-        readinessProbe: 
-          periodSeconds: 1 
-          httpGet: 
-            path: / 
-            port: 80
+        - containerPort: 80 
