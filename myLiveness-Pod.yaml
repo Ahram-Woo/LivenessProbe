@@ -12,9 +12,4 @@ spec:
     - sh
     - -c
     - |
-      while true
-      do
-        APP_VERSION=`nginx -v`
-        echo "[`date`] $APP_VERSION "
-        sleep 1
-      done
+    - nginx -v
