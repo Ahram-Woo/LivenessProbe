@@ -1,15 +1,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: update-checker
   labels:
-    app: update-checker
+    test: liveness
+  name: liveness-exec
 spec:
   containers:
-  - name: kubectl
-    image: nginx
-    command:
-    - sh
+  - name: liveness
+    image: k8s.gcr.io/busybox
+    args:
+    - /bin/sh
     - -c
-    - |
-    - nginx -v
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
