@@ -5,12 +5,12 @@ metadata:
 spec:
   restartPolicy: Never
   containers:
-  - name: nginx-container
-    image: nginx
+  - name: ubuntu-container
+    image: ubuntu
     command:
         - /bin/bash
         - -ec
-        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 50
+        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 100
     livenessProbe:
        exec:
          command:
