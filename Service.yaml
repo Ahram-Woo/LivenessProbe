@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pod-with-liveness-check
+  name: liveness-probe
 spec:
   ports:
   - port: 8080
