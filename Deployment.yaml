@@ -23,8 +23,3 @@ spec:
               port: 8080
               path: /api
             initialDelaySeconds: 60
-          readinessProbe:
-            httpGet:
-              port: 8080
-              path: /api
-            initialDelaySeconds: 60
