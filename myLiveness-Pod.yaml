@@ -1,20 +1,19 @@
+apiVersion: apps/v1
 kind: Pod
-apiVersion: v1
 metadata:
-  name: liveness-probe-never-restart
+  name: pod-with-liveness-check
 spec:
-  restartPolicy: Never
   containers:
-  - name: ubuntu-container
-    image: ubuntu
-    command:
-        - /bin/bash
-        - -ec
-        - touch /tmp/live; sleep 30; rm /tmp/live; sleep 100
-    livenessProbe:
-       exec:
-         command:
-            - cat
-            - /tmp/live
-       initialDelaySeconds: 5
-       periodSeconds: 5
+    - image: k8spatterns/random-generator:1.0
+      name: random-generator
+      env:
+        - name: DELAY_STARTUP
+          value: "20"
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+            livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
